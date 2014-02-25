@@ -35,6 +35,41 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     }
 
     /*
+     * Characters
+     */
+    $scope.characters = [
+        {
+            id: 'twilight',
+            name: 'Twilight Sparkle'
+        },
+        {
+            id: 'fluttershy',
+            name: 'Fluttershy'
+        },
+        {
+            id: 'applejack',
+            name: 'Applejack'
+        },
+        {
+            id: 'pinkie',
+            name: 'Pinkie Pie'
+        },
+        {
+            id: 'rarity',
+            name: 'Rarity'
+        },
+        {
+            id: 'rainbow',
+            name: 'Rainbow Dash'
+        }
+    ]
+    $scope.character = localStorage.getItem('character') || 'twilight';
+    $scope.changeCharacter = function (id) {
+        $scope.character = id;
+        localStorage.setItem('character', id);
+    }
+
+    /*
      * Count (Clicks)
      */
     $scope.count = Number(localStorage.getItem('count')) || 0;

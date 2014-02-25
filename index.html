@@ -42,6 +42,17 @@
                             </ul>
                         </li>
                         <li class="divider"></li>
+                        <li class="has-dropdown">
+                            <a href="#">Characters</a>
+                            <ul class="dropdown">
+                                <li ng-repeat="character in characters">
+                                    <a href="#" ng-click="changeCharacter(character.id)">
+                                        {{character.name}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
                         <li>
                             <a href="#" ng-click="toggleMute()" ng-bind="muted && 'Unmute' || 'Mute'"></a>
                         </li>
@@ -64,7 +75,7 @@
         <div class="pony">
             <div class="clickarea" ng-click="incrementCount($event)"></div>
             <div class="effects"></div>
-            <img src="assets/img/pony.png">
+            <img ng-src="assets/img/characters/{{character}}.png">
         </div>
 	</div>
 
