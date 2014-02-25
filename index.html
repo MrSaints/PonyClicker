@@ -11,6 +11,7 @@
 
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.0.0/animate.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 
@@ -54,7 +55,9 @@
         </div>
 
         <div class="pony">
-            <img src="assets/img/pony.png" ng-click="incrementCount()">
+            <div class="clickarea" ng-click="incrementCount($event)"></div>
+            <div class="effects"></div>
+            <img src="assets/img/pony.png">
         </div>
 	</div>
 

@@ -14,8 +14,11 @@ body {
 	background-size: cover;
 }
 
-.counter {
+.counter, p {
     font-family: "Equestria", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+.counter {
 	font-size: 4rem;
 }
 
@@ -30,3 +33,18 @@ body {
 	bottom: 5%;
 	z-index: 99;
 }
+
+.ugh {
+	font-size: 2rem;
+	margin: 0;
+	position: absolute;
+}
+
+.clickarea, .effects {
+	height: 100%;
+	position: absolute;
+	width: 100%;
+}
+	.clickarea {
+		z-index: 2;
+	}

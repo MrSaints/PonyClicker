@@ -1,15 +1,30 @@
 $(document).foundation();
 
+var $effects = $('.effects');
 var $MLP = angular.module('ponyClicker', []);
 
 $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval) {
     var $this = this;
 
     /*
+     * Effects
+     */
+    $this.initEffects = function (x, y) {
+        var $ugh = $('<p class="ugh animated fadeOutUp"/>');
+
+        $ugh.css('left', x - 36 + Math.random() * 8 + "px");
+        $ugh.css('top', y - 20 + Math.random() * 8 + "px");
+        $ugh.text('Ughh!');
+
+        $effects.append($ugh);
+    }
+
+    /*
      * Count (Clicks)
      */
     $scope.count = Number(localStorage.getItem('count')) || 0;
-    $scope.incrementCount = function () {
+    $scope.incrementCount = function (e) {
+        $this.initEffects(e.offsetX, e.offsetY);
         $scope.count += 1;
     }
 
@@ -19,7 +34,7 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     $this.incrementUpCount = function () {
         var upCount = 0;
         angular.forEach($scope.upgrades, function(value, key) {
-            upCount += ($this.defaultUpgrades[key].rate * value.total);
+            upCount += (value.rate * value.total);
         });
         $scope.count += upCount;
     }
@@ -60,7 +75,7 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
 
         $scope.count -= $scope.upgrades[type].cost;
         $scope.upgrades[type].total += 1;
-        $scope.upgrades[type].cost *= $scope.defaultUpgrades[type].multiplier;
+        $scope.upgrades[type].cost *= $scope.upgrades[type].multiplier;
     }
 
     /*
