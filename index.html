@@ -10,37 +10,50 @@
 
 <body>
 	<div class="wrapper" ng-controller="indexCtrl">
-        <div class="row">
-            <div class="large-12 columns text-center">
-                <h1>Cutie Marks: {{count | number: 0}}</h1>
-            </div>
+        <div class="navigation contain-to-grid">
+            <nav class="top-bar" data-topbar>
+                <ul class="title-area">
+                    <li class="name">
+                        <h1><a href="#">Pony Clicker (Angular)</a></h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
+                </ul>
+
+                <section class="top-bar-section">
+                    <ul class="right">
+                        <li class="has-dropdown">
+                            <a href="#">Purchase Ugrades</a>
+                            <ul class="dropdown">
+                                <li ng-repeat="upgrade in upgrades">
+                                    <a href="#" ng-click="buyUpgrade(upgrades.indexOf(upgrade))">
+                                        <b>{{upgrade.type}} (+{{upgrade.rate}}):</b> {{upgrade.cost | number: 0}} CM
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="#">Show Upgrades</a></li>
+                        <li class="divider"></li>
+                        <li class="has-form"><a href="#" class="button alert">Reset</a></li>
+                    </ul>
+                </section>
+            </nav>
         </div>
 
         <div class="row">
-            <div class="large-4 columns upgrades">
-                <h2>Current Upgrades:</h2>
-                <ul>
-                    <li ng-repeat="(type, prop) in upgrades">
-                        <b>{{type}}:</b> {{prop.total}}
-                    </li>
-                </ul>
+            <div class="large-12 columns text-center">
+                    <h1>{{count | number: 0}} Cutie Marks</h1>
+            </div>
+        </div>
 
-                <h2>Upgrades</h2>
-                <ul class="no-bullet">
-                    <li ng-repeat="(type, prop) in upgrades">
-                        <a href="#" class="button expand" ng-click="buyUpgrade(type)">
-                            {{type}} (+{{prop.rate}}): {{prop.cost | number: 0}} CM
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="large-8 columns text-center">
-                <img src="assets/img/pony.png" class="image" ng-click="incrementCount()">
-            </div>
+        <div class="pony">
+            <img src="assets/img/pony.png" ng-click="incrementCount()">
         </div>
 	</div>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/js/foundation.min.js"></script>
 	<script src="assets/js/app.js"></script>
 </body>
 </html>

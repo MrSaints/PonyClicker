@@ -1,14 +1,16 @@
-.wrapper {
-	padding: 1rem 0;
+body {
+	background: url('../img/background.jpg') no-repeat bottom fixed;
+	background-size: cover;
 }
-	.row {
-		padding-bottom: 1rem;
-	}
 
-.image {
+.navigation {
+	margin-bottom: 2rem;
+}
+
+.pony {
 	cursor: pointer;
-}
-
-.upgrades {
-	text-transform: capitalize;
+	position: absolute;
+	left: 50%;
+	bottom: 5%;
+	z-index: 99;
 }
