@@ -78,4 +78,11 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     };
 
     $interval($this.save, 5000);
+
+    /*
+     * Reset
+     */
+    $scope.reset = function () {
+        $scope.upgrades = $this.defaultUpgrades;
+    }
 }]);
