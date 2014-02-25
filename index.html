@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="ponyClicker">
 <head>
     <meta charset="utf-8">
 	<title>Pony Clicker (Angular)</title>
@@ -8,13 +8,14 @@
 </head>
 
 <body>
-	<div class="wrapper">
+	<div class="wrapper" ng-controller="indexCtrl">
 		<h1>{{count}}</h1>
-		<div class="image" ng-click="count = count + 1" ng-init="count = 0">
+		<div class="image" ng-click="incrementCount()">
 			<img src="assets/img/pony.png">
 		</div>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+	<script src="assets/js/app.js"></script>
 </body>
 </html>
