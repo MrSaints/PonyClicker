@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<title>Pony Clicker (Angular)</title>
+	<title>Equestria: Bit Clicker (Angular)</title>
 
     <link rel="dns-prefetch" href="//ajax.googleapis.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
@@ -23,7 +23,7 @@
             <nav class="top-bar" data-topbar>
                 <ul class="title-area">
                     <li class="name">
-                        <h1><a href="#">Pony Clicker (Angular)</a></h1>
+                        <h1><a href="#">Equestria: Bit Clicker</a></h1>
                     </li>
                     <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
                 </ul>
@@ -35,7 +35,7 @@
                             <ul class="dropdown">
                                 <li ng-repeat="upgrade in upgrades">
                                     <a href="#" ng-click="buyUpgrade(upgrades.indexOf(upgrade))">
-                                        <b>{{upgrade.type}} (+{{upgrade.rate}}):</b> {{upgrade.cost | number: 0}} CM 
+                                        <b>{{upgrade.type}} (+{{upgrade.rate}}):</b> {{upgrade.cost | currency}} Bits 
                                         <span class="label">{{upgrade.total}}</span>
                                     </a>
                                 </li>
@@ -57,7 +57,7 @@
                             <a href="#" class="alert">Reset</a>
                             <ul class="dropdown">
                                 <li><a href="#" ng-click="reset(1)">Marketplace</a></li>
-                                <li><a href="#" ng-click="reset(2)">Cutie Marks</a></li>
+                                <li><a href="#" ng-click="reset(2)">Gold Bits</a></li>
                                 <li><a href="#" ng-click="reset(0)">All</a></li>
                             </ul>
                         </li>
@@ -72,7 +72,7 @@
 
         <div class="row">
             <div class="large-12 columns text-center">
-                <h1 class="counter">{{count | number: 0}} Cutie Marks</h1>
+                <h1 class="counter">{{count | currency}} Gold Bits</h1>
                 <h2 class="tutorial" ng-show="count === 0">(click Twilight Sparkle to begin)</h2>
             </div>
         </div>

@@ -37,7 +37,6 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
             clearTimeout($this.timeout);
 
         $this.timeout = setTimeout(function () {
-            console.log('Fired!');
             $effects.empty();
         }, 1000);
     }
