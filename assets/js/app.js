@@ -148,7 +148,18 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     /*
      * Reset
      */
-    $scope.reset = function () {
-        $scope.upgrades = $this.defaultUpgrades;
+    $scope.reset = function (type) {
+        switch (type) {
+            case 1:
+                $scope.upgrades = $this.defaultUpgrades;
+                break;
+            case 2:
+                $scope.count = 0;
+                break;
+            default:
+                $scope.upgrades = $this.defaultUpgrades;
+                $scope.count = 0;
+                localStorage.clear();
+        }
     }
 }]);

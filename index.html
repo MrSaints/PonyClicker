@@ -53,12 +53,17 @@
                             </ul>
                         </li>
                         <li class="divider"></li>
-                        <li>
-                            <a href="#" ng-click="toggleMute()" ng-bind="muted && 'Unmute' || 'Mute'"></a>
+                        <li class="has-dropdown">
+                            <a href="#" class="alert">Reset</a>
+                            <ul class="dropdown">
+                                <li><a href="#" ng-click="reset(1)">Marketplace</a></li>
+                                <li><a href="#" ng-click="reset(2)">Cutie Marks</a></li>
+                                <li><a href="#" ng-click="reset(0)">All</a></li>
+                            </ul>
                         </li>
                         <li class="divider"></li>
-                        <li class="has-form">
-                            <a href="#" class="button alert" ng-click="reset()">Reset</a>
+                        <li>
+                            <a href="#" ng-click="toggleMute()" ng-bind="muted && 'Unmute' || 'Mute'"></a>
                         </li>
                     </ul>
                 </section>
