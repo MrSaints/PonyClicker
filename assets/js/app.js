@@ -85,6 +85,8 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         $scope.count -= $scope.upgrades[type].cost;
         $scope.upgrades[type].total += 1;
         $scope.upgrades[type].cost *= $scope.upgrades[type].multiplier;
+
+        localStorage.setItem('upgrades', JSON.stringify($scope.upgrades));
     }
 
     /*
@@ -93,7 +95,6 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     $this.save = function (newValue, oldValue) {
         console.log('Saving...');
         localStorage.setItem('count', newValue);
-        localStorage.setItem('upgrades', JSON.stringify($scope.upgrades));
     }
 
     window.onbeforeunload = function() {
