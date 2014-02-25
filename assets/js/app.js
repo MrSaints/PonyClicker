@@ -15,12 +15,11 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         $scope.muted = !$scope.muted;
         localStorage.setItem('mute', $scope.muted);
     }
-
     $this.initEffects = function (x, y) {
         var $ugh = $('<p class="ugh animated fadeOutUp"/>');
 
-        $ugh.css('left', x - 36 + Math.random() * 8 + "px");
-        $ugh.css('top', y - 20 + Math.random() * 8 + "px");
+        $ugh.css('left', x - 36 + Math.random() * 10 + "px");
+        $ugh.css('top', y - 20 + Math.random() * 10 + "px");
         $ugh.text('Ughh!');
 
         $effects.append($ugh);
@@ -32,6 +31,15 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         } else {
             new Audio('assets/audio/ogg.mp3').play();
         }
+
+        // Clear garbage
+        if ($this.timeout)
+            clearTimeout($this.timeout);
+
+        $this.timeout = setTimeout(function () {
+            console.log('Fired!');
+            $effects.empty();
+        }, 1000);
     }
 
     /*
