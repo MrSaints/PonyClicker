@@ -26,14 +26,22 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     /*
      * Upgrades
      */
-    $scope.upgrades = JSON.parse(localStorage.getItem('upgrades')) || { 
-        autoclicker: {
+    $this.defaultUpgrades = { 
+        "Autoclicker": {
             cost: 20,
-            multiplier: 1.5,
+            multiplier: 1.3,
             rate: 0.1,
+            total: 0
+        },
+        "Apple Crumble": {
+            cost: 300,
+            multiplier: 1.1,
+            rate: 0.3,
             total: 0
         }
     };
+    $this.storedUpgrades = JSON.parse(localStorage.getItem('upgrades'));
+    $scope.upgrades = $this.storedUpgrades || $this.defaultUpgrades;
 
     $scope.buyUpgrade = function (type) {
         if ($scope.count < $scope.upgrades[type].cost)
@@ -59,4 +67,21 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     };
 
     $interval($this.save, 5000);
+
+    /*
+     * Validate local storage (resets everything for now)
+     */
+    $this.validateData = function () {
+        var update = false;
+        angular.forEach($this.defaultUpgrades, function(value, key) {
+            if (update) {
+                return;
+            } else if (typeof $this.storedUpgrades[key] === "undefined" 
+                        || $this.storedUpgrades[key] === null) {
+                $scope.upgrades = $this.defaultUpgrades;
+                update = true;
+            }
+        });
+    }
+    $this.validateData();
 }]);
