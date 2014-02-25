@@ -1,33 +1,6 @@
-angular.module('ngDebounce', []).factory('$debounce', function ($timeout, $q) {
-    return function (func, wait, immediate) {
-        var timeout;
-        var deferred = $q.defer();
-        return function() {
-            var context = this, args = arguments;
-            var later = function() {
-                timeout = null;
-                if(!immediate) {
-                    deferred.resolve(func.apply(context, args));
-                    deferred = $q.defer();
-                }
-            };
-            var callNow = immediate && !timeout;
-            if ( timeout ) {
-                $timeout.cancel(timeout);
-            }
-            timeout = $timeout(later, wait);
-            if (callNow) {
-                deferred.resolve(func.apply(context,args));
-                deferred = $q.defer();
-            }
-            return deferred.promise;
-        };
-    };
-});
+var $MLP = angular.module('ponyClicker', []);
 
-var $MLP = angular.module('ponyClicker', ['ngDebounce']);
-
-$MLP.controller('indexCtrl', ['$scope', '$debounce', '$interval', function ($scope, $debounce, $interval) {
+$MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval) {
     var $this = this;
 
     /*
@@ -56,7 +29,7 @@ $MLP.controller('indexCtrl', ['$scope', '$debounce', '$interval', function ($sco
     $scope.upgrades = JSON.parse(localStorage.getItem('upgrades')) || { 
         autoclicker: {
             cost: 20,
-            multiplier: 1.1,
+            multiplier: 1.5,
             rate: 0.1,
             total: 0
         }
@@ -81,10 +54,10 @@ $MLP.controller('indexCtrl', ['$scope', '$debounce', '$interval', function ($sco
         localStorage.setItem('upgrades', JSON.stringify($scope.upgrades));
     }
 
-    $scope.$watch('count', $debounce($this.save, 3000), true);
-
     window.onbeforeunload = function() {
         console.log('Forcing save...');
         $this.save($scope.count);
     };
+
+    $interval($this.save, 5000);
 }]);
