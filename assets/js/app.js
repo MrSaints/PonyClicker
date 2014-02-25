@@ -1,6 +1,7 @@
 $(document).foundation();
 
 var $effects = $('.effects');
+var $audio = new Audio;
 var $MLP = angular.module('ponyClicker', []);
 
 $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval) {
@@ -9,7 +10,7 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     /*
      * Effects
      */
-    $scope.muted = localStorage.getItem('mute') || false;
+    $scope.muted = localStorage.getItem('mute') === "true";
     $scope.toggleMute = function () {
         $scope.muted = !$scope.muted;
         localStorage.setItem('mute', $scope.muted);
@@ -24,8 +25,13 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
 
         $effects.append($ugh);
 
-        if (!$scope.muted)
-            new Audio("assets/audio/ugh.mp3").play();
+        if ($scope.muted) return;
+
+        if ($audio.canPlayType('audio/mpeg;')) {
+            new Audio('assets/audio/ugh.mp3').play();
+        } else {
+            new Audio('assets/audio/ogg.mp3').play();
+        }
     }
 
     /*
