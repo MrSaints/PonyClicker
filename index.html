@@ -22,19 +22,20 @@
                 <section class="top-bar-section">
                     <ul class="right">
                         <li class="has-dropdown">
-                            <a href="#">Purchase Ugrades</a>
+                            <a href="#">Marketplace</a>
                             <ul class="dropdown">
                                 <li ng-repeat="upgrade in upgrades">
                                     <a href="#" ng-click="buyUpgrade(upgrades.indexOf(upgrade))">
-                                        <b>{{upgrade.type}} (+{{upgrade.rate}}):</b> {{upgrade.cost | number: 0}} CM
+                                        <b>{{upgrade.type}} (+{{upgrade.rate}}):</b> {{upgrade.cost | number: 0}} CM 
+                                        <span class="label">{{upgrade.total}}</span>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#">Show Upgrades</a></li>
-                        <li class="divider"></li>
-                        <li class="has-form"><a href="#" class="button alert">Reset</a></li>
+                        <li class="has-form">
+                            <a href="#" class="button alert" ng-click="reset()">Reset</a>
+                        </li>
                     </ul>
                 </section>
             </nav>
@@ -42,7 +43,7 @@
 
         <div class="row">
             <div class="large-12 columns text-center">
-                    <h1>{{count | number: 0}} Cutie Marks</h1>
+                    <h1 class="counter">{{count | number: 0}} Cutie Marks</h1>
             </div>
         </div>
 
