@@ -9,6 +9,12 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     /*
      * Effects
      */
+    $scope.muted = localStorage.getItem('mute') || false;
+    $scope.toggleMute = function () {
+        $scope.muted = !$scope.muted;
+        localStorage.setItem('mute', $scope.muted);
+    }
+
     $this.initEffects = function (x, y) {
         var $ugh = $('<p class="ugh animated fadeOutUp"/>');
 
@@ -17,6 +23,9 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         $ugh.text('Ughh!');
 
         $effects.append($ugh);
+
+        if (!$scope.muted)
+            new Audio("assets/audio/ugh.mp3").play();
     }
 
     /*
