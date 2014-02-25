@@ -14,7 +14,7 @@ body {
 	background-size: cover;
 }
 
-.counter, p {
+.counter, .tutorial, p {
     font-family: "Equestria", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
