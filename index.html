@@ -4,15 +4,36 @@
     <meta charset="utf-8">
 	<title>Pony Clicker (Angular)</title>
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.0/normalize.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 	<div class="wrapper" ng-controller="indexCtrl">
-		<h1>{{count}}</h1>
-		<div class="image" ng-click="incrementCount()">
-			<img src="assets/img/pony.png">
-		</div>
+        <div class="row">
+            <div class="large-12 columns text-center">
+                <h1>Cutie Marks: {{count | number: 0}}</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-4 columns">
+                <h2>Current Upgrades:</h2>
+                <ul>
+                    <li><b>Autoclicker(s):</b> {{upgrades.autoclicker.total}}</li>
+                </ul>
+
+                <h2>Upgrades</h2>
+                <ul class="no-bullet">
+                    <li><a href="#" class="button expand" ng-click="buyAutoclicker()">
+                        Autoclicker (+{{upgrades.autoclicker.rate}}): {{upgrades.autoclicker.cost | number: 0}} CM
+                    </a></li>
+                </ul>
+            </div>
+            <div class="large-8 columns text-center">
+                <img src="assets/img/pony.png" class="image" ng-click="incrementCount()">
+            </div>
+        </div>
 	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
