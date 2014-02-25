@@ -1,0 +1,23 @@
+{
+  "name": "PonyClicker",
+  "version": "0.0.0",
+  "homepage": "https://github.com/MrSaints/PonyClicker",
+  "authors": [
+    "Peter Atashian",
+    "Ian Lai <ian@fyianlai.com>"
+  ],
+  "description": "We're going to need a carefully thought-out plan -Twilight Sparkle",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.13"
+  }
+}
