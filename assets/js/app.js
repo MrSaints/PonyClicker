@@ -35,14 +35,13 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         }
     };
 
-    // Autoclicker
-    $scope.buyAutoclicker = function () {
-        if ($scope.count < $scope.upgrades.autoclicker.cost)
+    $scope.buyUpgrade = function (type) {
+        if ($scope.count < $scope.upgrades[type].cost)
             return;
 
-        $scope.count -= $scope.upgrades.autoclicker.cost;
-        $scope.upgrades.autoclicker.total += 1;
-        $scope.upgrades.autoclicker.cost *= $scope.upgrades.autoclicker.multiplier;
+        $scope.count -= $scope.upgrades[type].cost;
+        $scope.upgrades[type].total += 1;
+        $scope.upgrades[type].cost *= $scope.upgrades[type].multiplier;
     }
 
     /*

@@ -8,3 +8,7 @@
 .image {
 	cursor: pointer;
 }
+
+.upgrades {
+	text-transform: capitalize;
+}
