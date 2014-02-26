@@ -102,21 +102,21 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
      */
     $this.defaultUpgrades = [
         {
-            type: "Autoclicker",
+            type: "Bag of Apples",
             cost: 20,
             total: 0,
             multiplier: 1.5,
             rate: 0.1
         },
         {
-            type: "Apple Crumble",
+            type: "Stall Cart",
             cost: 100,
             total: 0,
             multiplier: 1.3,
             rate: 0.5
         },
         {
-            type: 'Club House',
+            type: 'Sweet Apple Acres',
             cost: 300,
             total: 0,
             multiplier: 1.1,
