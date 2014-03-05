@@ -1,5 +1,6 @@
 $(document).foundation();
 
+var $version = '0.0.1';
 var $effects = $('.effects');
 var $audio = new Audio;
 var $MLP = angular.module('ponyClicker', []);
@@ -8,15 +9,21 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     var $this = this;
 
     /*
+     * Version control
+     */ 
+    $this.storedVersion = localStorage.getItem('version');
+
+    /*
      * Effects
      */
     $scope.muted = localStorage.getItem('mute') === "true";
     $scope.toggleMute = function () {
         $scope.muted = !$scope.muted;
         localStorage.setItem('mute', $scope.muted);
-    }
+    };
     $this.initEffects = function (x, y) {
         var $ugh = $('<p class="ugh animated fadeOutUp"/>');
+        var $character = 'twilight'; // Temporary (Future: $scope.character)
 
         $ugh.css('left', x - 36 + Math.random() * 10 + "px");
         $ugh.css('top', y - 20 + Math.random() * 10 + "px");
@@ -26,11 +33,10 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
 
         if ($scope.muted) return;
 
-        if ($audio.canPlayType('audio/mpeg;')) {
-            new Audio('assets/audio/ugh.mp3').play();
-        } else {
-            new Audio('assets/audio/ogg.mp3').play();
-        }
+        if ($audio.canPlayType('audio/mpeg;'))
+            new Audio('assets/audio/' + $character + '.mp3').play();
+        else
+            new Audio('assets/audio/' + $character + '.mp3').play();
 
         // Clear garbage
         if ($this.timeout)
@@ -39,7 +45,7 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         $this.timeout = setTimeout(function () {
             $effects.empty();
         }, 1000);
-    }
+    };
 
     /*
      * Characters
@@ -69,12 +75,12 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
             id: 'rainbow',
             name: 'Rainbow Dash'
         }
-    ]
+    ];
     $scope.character = localStorage.getItem('character') || 'twilight';
     $scope.changeCharacter = function (id) {
         $scope.character = id;
         localStorage.setItem('character', id);
-    }
+    };
 
     /*
      * Count (Clicks)
@@ -83,7 +89,7 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     $scope.incrementCount = function (e) {
         $this.initEffects(e.offsetX, e.offsetY);
         $scope.count += 1;
-    }
+    };
 
     /*
      * Count (Upgrades)
@@ -94,7 +100,7 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
             upCount += (value.rate * value.total);
         });
         $scope.count += upCount;
-    }
+    };
     $interval($this.incrementUpCount, 1000);
 
     /*
@@ -126,6 +132,24 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
     $this.storedUpgrades = JSON.parse(localStorage.getItem('upgrades'));
     $scope.upgrades = $this.storedUpgrades || $this.defaultUpgrades;
 
+    $this.updateUpgrades = function () {
+        if ($this.storedVersion === $version) {
+            console.log('Local data is up-to-date (' + $this.storedVersion + ').');
+            return;
+        }
+
+        angular.forEach($this.defaultUpgrades, function(prop, index) {
+            $scope.upgrades[index].type = prop.type;
+            $scope.upgrades[index].multiplier = prop.multiplier;
+            $scope.upgrades[index].rate = prop.rate;
+        });
+
+        localStorage.setItem('version', $version);
+        $this.saveUpgrades();
+
+        console.log('Updated local data to the latest version (' + $version + ').');
+    };
+
     $scope.buyUpgrade = function (type) {
         if ($scope.count < $scope.upgrades[type].cost)
             return;
@@ -134,23 +158,28 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         $scope.upgrades[type].total += 1;
         $scope.upgrades[type].cost *= $scope.upgrades[type].multiplier;
 
-        localStorage.setItem('upgrades', JSON.stringify($scope.upgrades));
-    }
+        $this.saveUpgrades();
+    };
 
     /*
      * Saving
      */
-    $this.save = function (newValue, oldValue) {
-        console.log('Saving...');
+    $this.saveUpgrades = function () {
+        console.log('Saving upgrades...');
+        localStorage.setItem('upgrades', JSON.stringify($scope.upgrades));
+    };
+
+    $this.saveCount = function (newValue, oldValue) {
+        console.log('Saving count...');
         localStorage.setItem('count', newValue);
-    }
+    };
 
     window.onbeforeunload = function() {
         console.log('Forcing save...');
-        $this.save($scope.count);
+        $this.saveCount($scope.count);
     };
 
-    $interval($this.save, 5000);
+    $interval($this.saveCount, 5000); // Autosave
 
     /*
      * Reset
@@ -168,5 +197,10 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
                 $scope.count = 0;
                 localStorage.clear();
         }
-    }
+    };
+
+    /*
+     * Init
+     */
+    $this.updateUpgrades();
 }]);
