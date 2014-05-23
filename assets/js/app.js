@@ -31,13 +31,6 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
 
         $effects.append($ugh);
 
-        if ($scope.muted) return;
-
-        if (Modernizr.audio.mp3)
-            new Audio('assets/audio/' + $character + '.mp3').play();
-        else
-            new Audio('assets/audio/' + $character + '.ogg').play();
-
         // Clear garbage
         if ($this.timeout)
             clearTimeout($this.timeout);
@@ -45,6 +38,13 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
         $this.timeout = setTimeout(function () {
             $effects.empty();
         }, 1000);
+
+        if ($scope.muted) return;
+
+        if (Modernizr.audio.mp3)
+            new Audio('assets/audio/' + $character + '.mp3').play();
+        else
+            new Audio('assets/audio/' + $character + '.ogg').play();
     };
 
     /*
