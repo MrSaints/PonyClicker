@@ -33,10 +33,10 @@ $MLP.controller('indexCtrl', ['$scope', '$interval', function ($scope, $interval
 
         if ($scope.muted) return;
 
-        if ($audio.canPlayType('audio/mpeg;'))
+        if (Modernizr.audio.mp3)
             new Audio('assets/audio/' + $character + '.mp3').play();
         else
-            new Audio('assets/audio/' + $character + '.mp3').play();
+            new Audio('assets/audio/' + $character + '.ogg').play();
 
         // Clear garbage
         if ($this.timeout)
